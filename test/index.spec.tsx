@@ -1,5 +1,5 @@
 import { createScopedStore } from "../src";
-import { renderHook } from "@testing-library/react";
+import { render, renderHook } from "@testing-library/react";
 import { create } from "zustand";
 import { combine } from "zustand/middleware";
 import React from "react";
@@ -67,6 +67,28 @@ describe("index", () => {
 			);
 
 			expect(catId.current).toBe(1);
+		});
+
+		it("should throw if not wrapped in a provider", () => {
+			const [_, useCurrentCat] = createScopedStore(
+				usePageStore,
+				(store) =>
+					({ id }: { id: number }) => {
+						const cat = store.cats.find((cat) => cat.id === id);
+						if (!cat) throw new Error(`No cat found with id ${id}`);
+						return cat;
+					},
+			);
+
+			function DummyComponent() {
+				useCurrentCat();
+				return <div />;
+			}
+
+			const renderComponent = () => render(<DummyComponent />);
+			expect(renderComponent).toThrow(
+				"useStore must be used within a StoreProvider.",
+			);
 		});
 	});
 });
