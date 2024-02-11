@@ -138,7 +138,7 @@ return (
 
 When called without arguments, it returns the entire scoped store value.
 
-```
+```jsx
 const scopedValue = useStore();
 ```
 
@@ -148,7 +148,7 @@ const scopedValue = useStore();
 
 Returns the result of the selector function applied to the scoped store value.
 
-```
+```jsx
 const selectedValue = useStore(state => state.partOfScopedValue);
 ```
 
