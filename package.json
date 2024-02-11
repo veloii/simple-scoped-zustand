@@ -1,6 +1,6 @@
 {
   "name": "simple-scoped-zustand",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Helping to make zustand stores easier",
   "main": "./lib/index.js",
   "files": [
