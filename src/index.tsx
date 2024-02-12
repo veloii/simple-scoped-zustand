@@ -21,7 +21,8 @@ export function createScopedStore<StoreState, ScopeArgs, ScopeValue>(
 
 	const StoreProvider: React.FC<StoreProviderProps> = React.memo(
 		function StoreProvider({ children, ...args }) {
-			const scopedValue = initialStore((s) => scope(s)(args as ScopeArgs));
+			const store = initialStore();
+			const scopedValue = scope(store)(args as ScopeArgs);
 
 			return (
 				<StoreContext.Provider value={scopedValue}>
